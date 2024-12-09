@@ -3,7 +3,7 @@ module.exports = {
   version: "2.2.0",
   title: "theme",
   description: "",
-  icon: "public/icon.png",
+  icon: "web/public/icon.png",
   menu: async (kernel, info) => {
     let running = {
       install: info.running("install.js"),
