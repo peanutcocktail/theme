@@ -48,6 +48,7 @@ nav .container .btn {
   padding: 10px;
   margin-right: 10px;
   font-size: 20px;
+  cursor: pointer;
 }
 nav input {
   flex-grow: 1;
@@ -108,7 +109,6 @@ nav input {
     <div class='btns'>
       <a class='btn' href="/?mode=explore"><i class="fa-solid fa-globe"></i></a>
       <a class='btn' href="https://portal.pinokio.computer"><i class="fa-solid fa-question"></i></a>
-      <a class='btn' id='open'><i class="fa-regular fa-pen-to-square"></i></a>
       <a class='btn' href="/?mode=settings"><i class="fa-solid fa-gear"></i></a>
     </div>
     <input id='search' type='search' placeholder='search' autofocus/>
@@ -130,15 +130,15 @@ const filter = (items, value) => {
     }
   }
 }
-document.querySelector("#open").addEventListener("click", (e) => {
-  fetch("/openfs", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({ path: "<%=kernel.path('web')%>" })
-  }).then((res) => {
-    return res.json()
-  })
-})
+//document.querySelector("#open").addEventListener("click", (e) => {
+//  fetch("/openfs", {
+//    method: "POST",
+//    headers: { "Content-Type": "application/json", },
+//    body: JSON.stringify({ path: "<%=kernel.path('web/views/index.ejs')%>" })
+//  }).then((res) => {
+//    return res.json()
+//  })
+//})
 document.querySelector("#search").addEventListener("input", (e) => {
   let items = []
   document.querySelectorAll(".item").forEach((el) => {
