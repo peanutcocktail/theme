@@ -1,0 +1,146 @@
+<html>
+<head>
+<link href="/css/fontawesome.min.css" rel="stylesheet">
+<link href="/css/solid.min.css" rel="stylesheet">
+<link href="/css/regular.min.css" rel="stylesheet">
+<style>
+body {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px;
+  box-sizing: border-box;
+  font-family: Sans-serif;
+  font-size: 12px;
+  justify-content: center;
+}
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 50px;
+}
+nav .container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+nav .container .btns {
+  display: flex;
+}
+nav .container .btn i {
+  display: block;
+}
+nav .container .btn {
+  font-size: 14px;
+  text-align: center;
+  font-family: sans-serif;
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+nav input {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+}
+.item {
+  width: 50px;
+  text-decoration: none;
+  color: white;
+  padding: 20px;
+}
+.item.running {
+  color: yellowgreen;
+  font-weight: bold;
+}
+.item:hover {
+  background: rgba(0,0,0,0.1);
+}
+.item img {
+  width: 100%;
+  display: block;
+  border-radius: 100px;
+}
+.item .name {
+  text-overflow: ellipsis ellipsis;
+  text-align: center;
+  margin-top: 5px;
+}
+.hidden {
+  display: none !important;
+}
+</style>
+</head>
+<body>
+<main>
+<% running.forEach((item) => { %>
+  <a class='item running' href="<%=item.browser_url%>">
+    <img src="<%=item.icon%>"/>
+    <div class='name'><%=item.name%></div>
+  </a>
+<% }) %>
+<% notRunning.forEach((item) => { %>
+  <a class='item' href="<%=item.browser_url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>">
+    <% if (item.icon) { %>
+      <img src="<%=item.icon%>"/>
+    <% } else { %>
+      <img src="icon.png"/>
+    <% } %>
+    <div class='name'><%=item.name%></div>
+  </a>
+<% }) %>
+</main>
+<nav>
+  <div class='container'>
+    <div class='btns'>
+      <a class='btn' href="/?mode=explore"><i class="fa-solid fa-globe"></i></a>
+      <a class='btn' href="https://portal.pinokio.computer"><i class="fa-solid fa-question"></i></a>
+      <a class='btn' href="/?mode=settings"><i class="fa-solid fa-gear"></i></a>
+    </div>
+    <input id='search' type='search' placeholder='search' autofocus/>
+  </div>
+</nav>
+<script>
+const filter = (items, value) => {
+  for(let i=0; i<items.length; i++) {
+    let item = items[i]
+    let re = new RegExp(value, "i")
+    if (re.test(item.name)) {
+      item.el.classList.remove("hidden")
+    } else if (re.test(item.description)) {
+      item.el.classList.remove("hidden")
+    } else if (re.test(item.uri)) {
+      item.el.classList.remove("hidden")
+    } else {
+      item.el.classList.add("hidden")
+    }
+  }
+}
+document.querySelector("#search").addEventListener("input", (e) => {
+  let items = []
+  document.querySelectorAll(".item").forEach((el) => {
+    items.push({
+      name: el.getAttribute("data-name"),
+      description: el.getAttribute("data-description"),
+      uri: el.getAttribute("data-uri"),
+      el
+    })
+  })
+  filter(items, e.target.value)
+})
+</script>
+</body>
+</html>
