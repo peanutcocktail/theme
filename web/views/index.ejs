@@ -11,6 +11,10 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+header {
+  height: 100px;
+  width: 100%;
+}
 main {
   display: flex;
   flex-wrap: wrap;
@@ -87,6 +91,7 @@ nav input {
 </style>
 </head>
 <body>
+<header class='grabbable'></header>
 <main>
 <% running.forEach((item) => { %>
   <a class='item running' href="<%=item.browser_url%>">
