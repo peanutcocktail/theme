@@ -37,8 +37,8 @@ module.exports = {
         return [{
           icon: "fa-regular fa-pen-to-square",
           text: "Edit HTML",
-          href: kernel.path("web/views/index.ejs"),
-          fs: true
+          href: kernel.path("web/views"),
+          fs: "view"
         }, {
           icon: "fa-solid fa-plug",
           text: "Install",
