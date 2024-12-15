@@ -96,12 +96,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run(event)">
+    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="dblclick(event)">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run(event)">
+    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="dblclick(event)">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
@@ -138,19 +138,10 @@ const filter = (items, value) => {
     }
   }
 }
-const run = (event) => {
+const dblclick = (event) => {
   let href = event.target.getAttribute("data-href")
   location.href = href
 }
-//document.querySelector("#open").addEventListener("click", (e) => {
-//  fetch("/openfs", {
-//    method: "POST",
-//    headers: { "Content-Type": "application/json", },
-//    body: JSON.stringify({ path: "<%=kernel.path('web/views/index.ejs')%>" })
-//  }).then((res) => {
-//    return res.json()
-//  })
-//})
 document.querySelector("#search").addEventListener("input", (e) => {
   let items = []
   document.querySelectorAll(".item").forEach((el) => {
@@ -177,7 +168,9 @@ tippy('.item', {
     event.preventDefault()
     console.log({ instance, event })
     let attr = instance.reference.getAttribute("data-browse-url")
+    let attr2 = instance.reference.getAttribute("data-href")
     instance.popper.setAttribute("data-browse-url", attr)
+    instance.popper.setAttribute("data-href", attr2)
   },
 });
 
@@ -186,6 +179,12 @@ const browse = (event) => {
   event.stopPropagation()
   let url = event.target.closest("[data-browse-url]").getAttribute("data-browse-url")
   console.log(url)
+  location.href = url
+}
+const run = (event) => {
+  event.preventDefault()
+  event.stopPropagation()
+  let url = event.target.closest("[data-href]").getAttribute("data-href")
   location.href = url
 }
 </script>
