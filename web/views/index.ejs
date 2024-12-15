@@ -96,12 +96,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run()">
+    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run(event)">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run()">
+    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run(event)">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
@@ -138,8 +138,8 @@ const filter = (items, value) => {
     }
   }
 }
-const run = (e) => {
-  let href = e.target.getAttribute("data-href")
+const run = (event) => {
+  let href = event.target.getAttribute("data-href")
   location.href = href
 }
 //document.querySelector("#open").addEventListener("click", (e) => {
@@ -166,8 +166,8 @@ document.querySelector("#search").addEventListener("input", (e) => {
 tippy('.item', {
   content: `
     <ul>
-      <li onclick="run()">Run</li>
-      <li onclick="browse()">Visit (Without running)</li>
+      <li onclick="run(event)">Run</li>
+      <li onclick="browse(event)">Visit (Without running)</li>
     </ul>
   `,
   allowHTML: true,
@@ -177,6 +177,7 @@ tippy('.item', {
 
 const browse = (event) => {
   event.preventDefault()
+  event.stopPropagation()
   location.href = event.target.getAttribute("data-browse-url")
 }
 </script>
