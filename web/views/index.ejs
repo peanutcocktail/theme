@@ -173,6 +173,9 @@ tippy('.item', {
   allowHTML: true,
   interactive: true,
   trigger: 'contextmenu',
+  onTrigger(instance, event) {
+    console.log({ instance, event })
+  },
 });
 
 const browse = (event) => {
