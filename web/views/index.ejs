@@ -96,12 +96,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run(event)">
+    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run()">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run(event)">
+    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run()">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
@@ -166,8 +166,8 @@ document.querySelector("#search").addEventListener("input", (e) => {
 tippy('.item', {
   content: `
     <ul>
-      <li onclick="run(e)">Run</li>
-      <li onclick="browse(e)">Visit (Without running)</li>
+      <li onclick="run()">Run</li>
+      <li onclick="browse()">Visit (Without running)</li>
     </ul>
   `,
   allowHTML: true,
@@ -175,9 +175,9 @@ tippy('.item', {
   trigger: 'contextmenu',
 });
 
-const browse = (e) => {
-  e.preventDefault()
-  location.href = e.target.getAttribute("data-browse-url")
+const browse = (event) => {
+  event.preventDefault()
+  location.href = event.target.getAttribute("data-browse-url")
 }
 </script>
 </body>
