@@ -91,21 +91,22 @@ nav input {
 <body>
 <header class='grabbable'></header>
 <main>
-<% running.forEach((item) => { %>
-  <a class='item running' href="<%=item.browser_url%>">
-    <img src="<%=item.icon%>"/>
-    <div class='name'><%=item.name%></div>
-  </a>
-<% }) %>
-<% notRunning.forEach((item) => { %>
-  <a class='item' href="<%=item.browser_url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>">
-    <% if (item.icon) { %>
+<% items.forEach((item) => { %>
+  <% if (item.running) { %>
+    <a class='item running' href="<%=item.browser_url%>">
       <img src="<%=item.icon%>"/>
-    <% } else { %>
-      <img src="icon.png"/>
-    <% } %>
-    <div class='name'><%=item.name%></div>
-  </a>
+      <div class='name'><%=item.name%></div>
+    </a>
+  <% } else { %>
+    <a class='item' href="<%=item.browser_url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>">
+      <% if (item.icon) { %>
+        <img src="<%=item.icon%>"/>
+      <% } else { %>
+        <img src="icon.png"/>
+      <% } %>
+      <div class='name'><%=item.name%></div>
+    </a>
+  <% } %>
 <% }) %>
 </main>
 <nav>
