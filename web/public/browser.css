@@ -1,4 +1,13 @@
 body {
-  background: red;
+  background: darkolivegreen;
+  color: white;
+}
+nav {
+  background: none;
+}
+.header-item.btn {
+  color: white;
+}
+nav .btn2 {
   color: white;
 }
