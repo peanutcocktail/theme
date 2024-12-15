@@ -1,6 +1,6 @@
 body {
-  background: firebrick !important;
-  color: white !important;
+  background: rgba(0,0,0,0.9) !important;
+  color: gold !important;
 }
 aside {
   background: transparent !important;
