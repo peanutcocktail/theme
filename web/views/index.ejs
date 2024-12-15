@@ -175,7 +175,7 @@ tippy('.item', {
   trigger: 'contextmenu',
 });
 
-function browse(e) {
+const browse = (e) => {
   e.preventDefault()
   location.href = e.target.getAttribute("data-browse-url")
 }
