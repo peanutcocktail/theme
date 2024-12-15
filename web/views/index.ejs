@@ -68,6 +68,7 @@ nav input {
   text-decoration: none;
   color: white;
   padding: 20px;
+  cursor: pointer;
 }
 .item.running {
   color: yellowgreen;
@@ -103,12 +104,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="dblclick(event)">
+    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" onclick="dblclick(event)">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="dblclick(event)">
+    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" onclick="dblclick(event)">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
