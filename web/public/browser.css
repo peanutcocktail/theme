@@ -1,13 +1,13 @@
 body {
-  background: darkolivegreen;
-  color: white;
+  background: firebrick !important;
+  color: white !important;
 }
 nav {
-  background: none;
+  background: none !important;
 }
 .header-item.btn {
-  color: white;
+  color: white !important;
 }
 nav .btn2 {
-  color: white;
+  color: white !important;
 }
