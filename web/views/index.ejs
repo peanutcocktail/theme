@@ -96,12 +96,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' data-href="<%=item.url%>" ondblclick="visit(this)">
+    <a class='item running' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" ondblclick="run(event)">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>" ondblclick="visit(this)">
+    <a class='item' data-browse-url="<%=item.browse_url%>" data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-path="<%=item.path%>" ondblclick="run(event)">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
@@ -131,15 +131,15 @@ const filter = (items, value) => {
       item.el.classList.remove("hidden")
     } else if (re.test(item.description)) {
       item.el.classList.remove("hidden")
-    } else if (re.test(item.uri)) {
+    } else if (re.test(item.path)) {
       item.el.classList.remove("hidden")
     } else {
       item.el.classList.add("hidden")
     }
   }
 }
-const visit = (el) => {
-  let href = el.getAttribute("data-href")
+const run = (e) => {
+  let href = e.target.getAttribute("data-href")
   location.href = href
 }
 //document.querySelector("#open").addEventListener("click", (e) => {
@@ -157,7 +157,7 @@ document.querySelector("#search").addEventListener("input", (e) => {
     items.push({
       name: el.getAttribute("data-name"),
       description: el.getAttribute("data-description"),
-      uri: el.getAttribute("data-uri"),
+      path: el.getAttribute("data-path"),
       el
     })
   })
@@ -166,8 +166,8 @@ document.querySelector("#search").addEventListener("input", (e) => {
 tippy('.item', {
   content: `
     <ul>
-      <li onclick="runFunction()">Run Function</li>
-      <li onclick="deleteItem()">Delete</li>
+      <li onclick="run(e)"</li>
+      <li onclick="browse(e)">Visit (Without running)</li>
     </ul>
   `,
   allowHTML: true,
@@ -175,8 +175,8 @@ tippy('.item', {
   trigger: 'contextmenu',
 });
 
-function runFunction() {
-  alert('Function executed!');
+function browse(e) {
+  location.href = e.target.getAttribute("data-browse-url")
 }
 </script>
 </body>
