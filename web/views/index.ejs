@@ -159,10 +159,8 @@ document.querySelector("#search").addEventListener("input", (e) => {
 })
 tippy('.item', {
   content: `
-    <ul>
-      <li onclick="run(event)">Run</li>
-      <li onclick="browse(event)">Visit (Without running)</li>
-    </ul>
+    <div class='menuitem' onclick="run(event)">Run</div>
+    <div class='menuitem' onclick="browse(event)">Visit (Without running)</div>
   `,
   allowHTML: true,
   interactive: true,
