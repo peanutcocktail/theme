@@ -174,14 +174,19 @@ tippy('.item', {
   interactive: true,
   trigger: 'contextmenu',
   onTrigger(instance, event) {
+    event.preventDefault()
     console.log({ instance, event })
+    let attr = instance.reference.getAttribute("data-browse-url")
+    instance.popper.setAttribute("data-browse-url", attr)
   },
 });
 
 const browse = (event) => {
   event.preventDefault()
   event.stopPropagation()
-  location.href = event.target.getAttribute("data-browse-url")
+  let url = event.target.closest("[data-browse-url]").getAttribute("data-browse-url")
+  console.log(url)
+  location.href = url
 }
 </script>
 </body>
