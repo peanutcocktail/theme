@@ -166,7 +166,7 @@ document.querySelector("#search").addEventListener("input", (e) => {
 tippy('.item', {
   content: `
     <ul>
-      <li onclick="run(e)"</li>
+      <li onclick="run(e)">Run</li>
       <li onclick="browse(e)">Visit (Without running)</li>
     </ul>
   `,
@@ -176,6 +176,7 @@ tippy('.item', {
 });
 
 function browse(e) {
+  e.preventDefault()
   location.href = e.target.getAttribute("data-browse-url")
 }
 </script>
