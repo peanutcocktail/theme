@@ -1,6 +1,6 @@
 body {
   background: black !important;
-  color: yellowgreen !important;
+  color: gold !important;
 }
 aside {
   background: transparent !important;
@@ -9,8 +9,8 @@ nav {
   background: none !important;
 }
 .header-item.btn {
-  color: yellowgreen !important;
+  color: gold !important;
 }
-nav .btn2 {
-  color: yellowgreen !important;
+.btn2 {
+  color: gold !important;
 }
