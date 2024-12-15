@@ -2,6 +2,9 @@ body {
   background: firebrick !important;
   color: white !important;
 }
+aside {
+  background: transparent !important;
+}
 nav {
   background: none !important;
 }
