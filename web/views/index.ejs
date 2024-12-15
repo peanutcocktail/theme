@@ -4,6 +4,9 @@
 <link href="/css/fontawesome.min.css" rel="stylesheet">
 <link href="/css/solid.min.css" rel="stylesheet">
 <link href="/css/regular.min.css" rel="stylesheet">
+<link href"/tippy.css" rel='stylesheet'>
+<script src="/popperjs.js"></script>
+<script src="/tippy.js"></script>
 <style>
 body {
   background-image: url('bg.jpg');
@@ -93,12 +96,12 @@ nav input {
 <main>
 <% items.forEach((item) => { %>
   <% if (item.running) { %>
-    <a class='item running' href="<%=item.browser_url%>">
+    <a class='item running' data-href="<%=item.url%>" ondblclick="visit(this)">
       <img src="<%=item.icon%>"/>
       <div class='name'><%=item.name%></div>
     </a>
   <% } else { %>
-    <a class='item' href="<%=item.browser_url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>">
+    <a class='item' data-href="<%=item.url%>" data-name="<%=item.name%>" data-description="<%=item.description%>" data-uri="<%=item.uri%>" ondblclick="visit(this)">
       <% if (item.icon) { %>
         <img src="<%=item.icon%>"/>
       <% } else { %>
@@ -135,6 +138,10 @@ const filter = (items, value) => {
     }
   }
 }
+const visit = (el) => {
+  let href = el.getAttribute("data-href")
+  location.href = href
+}
 //document.querySelector("#open").addEventListener("click", (e) => {
 //  fetch("/openfs", {
 //    method: "POST",
@@ -156,6 +163,21 @@ document.querySelector("#search").addEventListener("input", (e) => {
   })
   filter(items, e.target.value)
 })
+tippy('.item', {
+  content: `
+    <ul>
+      <li onclick="runFunction()">Run Function</li>
+      <li onclick="deleteItem()">Delete</li>
+    </ul>
+  `,
+  allowHTML: true,
+  interactive: true,
+  trigger: 'click right',
+});
+
+function runFunction() {
+  alert('Function executed!');
+}
 </script>
 </body>
 </html>
