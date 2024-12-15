@@ -139,8 +139,11 @@ const filter = (items, value) => {
   }
 }
 const dblclick = (event) => {
-  let href = event.target.getAttribute("data-href")
-  location.href = href
+  let target = e.target
+  if (!target.classList.contains("item")) {
+    target = event.target.closest(".item")
+  }
+  location.href = target.getAttribute("data-href")
 }
 document.querySelector("#search").addEventListener("input", (e) => {
   let items = []
